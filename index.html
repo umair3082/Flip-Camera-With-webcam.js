@@ -3,3 +3,57 @@
 <a href="javascript:;" class="btn red col-md-12 col-xs-12" id="btnOpenCameraWindow_Licences" style="float: left;">
 Connect to Camera <b>(Photo ID, Driver License or Passport File)</b></a>
 </div>
+
+/*Add Bootstrap Model*/
+ <div id="InsuranceImageModel" class="modal fade col-md-12" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header btn-primary">
+                    <h4 class="modal-title">Take Photo for Insurance card (Front)</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="portlet-body form">
+                            <div class="form-body">
+                                <div class="row">
+
+                                    <div class="form-group">
+                                        <div>
+                                            <span>
+                                                <label id="lblfilename01" style="float: left; margin-left: 5px;"></label>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <input type="button" id="btnRotateCamera" value="Flip Camera" <%--id="take_photo"--%> class="btn green" style="margin-top: 15px;"/>
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <div style="display: flex;" class="class_cam01">
+                                            <div id="my_camera01"></div>
+                                            <div id="results01"></div>
+                                        </div>
+                                        
+                                        <input type="hidden" id="hdn_image_source01" name="hdn_image_source"/>
+                                        <input type="hidden" id="hdn_take_photo_by01" name="hdn_take_photo_by"/>
+                                        <div id="pre_take_buttons01">
+                                            <input type="button" value="Take Snapshot" id="take_snapshot01" class="btn green" style="margin-top: 15px;" onclick="preview_snapshot_1()"/>
+                                        </div>
+                                        <div id="post_take_buttons01" style="display: none">
+                                            <input type="button" value="&lt; Take Another" <%--id="take_photo"--%> class="btn green" style="margin-top: 15px;" onclick="cancel_preview_1()"/>
+                                            <input type="button" value="Save Photo &gt;" <%--id="save_photo"--%> class="btn green" style="margin-top: 15px;" onclick="save_photo_1()" style="font-weight: bold;"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="text-align: left">
+                    <a href="javascript:;" class="btn green" id="btnSaveInsuranceFrontPhoto" style="float: right">Save</a>
+                    <a href="javascript:;" class="btn default" id="btnCloseInsuranceModel" data-dismiss="modal" style="float: right">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
