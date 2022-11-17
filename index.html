@@ -56,4 +56,130 @@ Connect to Camera <b>(Photo ID, Driver License or Passport File)</b></a>
             </div>
         </div>
     </div>
+<script src="../Scripts/webcam/webcam.min.js"></script>
+<script>
 
+ $("#btnOpenCameraWindow_Additional").on('click', function (e) {
+            e.preventDefault();
+  //check if Device is Mobile then show rotate button
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                //console.log('Mobile')
+                $('#btnRotateCamera').show();
+            }
+            else {
+                $('#btnRotateCamera').hide();
+            }
+            CameraPhotoType = "Additional";
+            debugger;
+            $('#InsuranceImageModel').modal({
+                show: true,
+                backdrop: 'static',
+                keyboard: false
+            });
+
+            //$("#btnCloseRejectedReasonsModel").trigger('click');
+            $("#lblfilename01").html('');
+            filename = "";
+            //document.getElementById("file").value = null;
+            Webcam.set({
+                width: 320,
+                height: 240,
+                image_format: 'jpeg',
+                jpeg_quality: 90,
+                // I add this object constraints
+                constraints: {
+                    facingMode: 'environment'
+                }
+            });
+            Webcam.attach('#my_camera01');
+            document.getElementById('take_snapshot01').style.display = '';
+            document.getElementById('pre_take_buttons01').style.display = '';
+            $(".class_cam01").css("display", "flex");
+            
+            $('#InsuranceImageModel').find('.modal-header').find('.modal-title').text('Additional Images');
+        });
+        function preview_snapshot_1() {
+            // freeze camera so user can preview pic
+            Webcam.freeze();
+
+            // swap button sets
+            document.getElementById('pre_take_buttons01').style.display = 'none';
+            document.getElementById('post_take_buttons01').style.display = '';
+            $("#lblfilename01").html('');
+            filename = "";
+            //document.getElementById("file01").value = null;
+
+            document.getElementById('hdn_take_photo_by').value = 'webcam';
+        }
+
+        function cancel_preview_1() {
+            // cancel preview freeze and return to live camera feed
+            Webcam.unfreeze();
+
+            // swap buttons back
+            document.getElementById('pre_take_buttons01').style.display = '';
+            document.getElementById('post_take_buttons01').style.display = 'none';
+        }
+
+        function save_photo_1() {
+            debugger;
+            // actually snap photo (from preview freeze) and display it
+            Webcam.snap(function (data_uri) {
+                // display results in page
+                document.getElementById('results01').innerHTML =
+                    /*'<h2>Here is your image:</h2>' +*/
+                    '<img src="' + data_uri + '"/>';
+                document.getElementById('hdn_image_source01').value = data_uri;
+                // swap buttons back
+                document.getElementById('pre_take_buttons01').style.display = '';
+                document.getElementById('post_take_buttons01').style.display = 'none';
+                //this.close();
+
+                //$('#ContentPlaceHolder1_hfImagesPath1').val(document.getElementById('hdn_image_source').value);
+                //$('input[name="ctl00$ContentPlaceHolder1$FileUpload7"]').attr("disabled", true);
+            });
+        }
+ /*Rotate Camera*/
+ $('#btnRotateCamera').on('click', function () {
+            //e.preventDefault();
+            Webcam.reset();
+            
+            debugger;
+            $("#lblfilename").html('');
+            filename = "";
+            //document.getElementById("file").value = null;
+            var cameraStatus = Webcam.params.constraints.facingMode;
+            if (cameraStatus == "environment") {
+                Webcam.set({
+                    width: 320,
+                    height: 240,
+                    image_format: 'jpeg',
+                    jpeg_quality: 90,
+                    // I add this object constraints
+                    constraints: {
+                        facingMode: { exact: 'user' }
+                    }
+                });
+            }
+            else {
+                Webcam.set({
+                    width: 320,
+                    height: 240,
+                    image_format: 'jpeg',
+                    jpeg_quality: 90,
+                    // I add this object constraints
+                    constraints: {
+                        facingMode: 'environment'
+                    }
+                });
+            }
+           
+            Webcam.attach('#my_camera01');
+            document.getElementById('take_snapshot01').style.display = '';
+            document.getElementById('pre_take_buttons01').style.display = '';
+            $(".class_cam01").css("display", "flex");
+
+            $('#InsuranceImageModel').find('.modal-header').find('.modal-title').text('Take Photo for Photo ID, Driver License or Passport File');
+        })
+ 
+</script>
